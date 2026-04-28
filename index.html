@@ -1512,44 +1512,60 @@
       </div>
       <div class="contact-form">
         <h3>Send an Enquiry</h3>
-        <div class="form-row">
-          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
-          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 00000 00000"></div>
-        </div>
-        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Tour Type</label>
-            <select>
-              <option>Select tour type</option>
-              <option>International Group Tour</option>
-              <option>Corporate Tour</option>
-              <option>Honeymoon Package</option>
-              <option>Family Package</option>
-              <option>Private Custom Tour</option>
-              <option>Pilgrimage Tour</option>
-            </select>
+        <form id="enquiryForm" action="https://formspree.io/f/xkokdgez" method="POST">
+          <div class="form-row">
+            <div class="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Your name" required></div>
+            <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="+91 00000 00000" required></div>
           </div>
-          <div class="form-group">
-            <label>Destination</label>
-            <select>
-              <option>Select destination</option>
-              <option>Europe</option>
-              <option>Bali</option>
-              <option>Dubai</option>
-              <option>Thailand</option>
-              <option>Singapore</option>
-              <option>Maldives</option>
-              <option>Japan</option>
-              <option>Australia</option>
-              <option>India</option>
-              <option>Other</option>
-            </select>
+          <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@email.com" required></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tour Type</label>
+              <select name="tour_type">
+                <option>Select tour type</option>
+                <option>International Group Tour</option>
+                <option>Corporate Tour</option>
+                <option>Honeymoon Package</option>
+                <option>Family Package</option>
+                <option>Private Custom Tour</option>
+                <option>Pilgrimage Tour</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Destination</label>
+              <select name="destination">
+                <option>Select destination</option>
+                <option>Europe</option>
+                <option>Bali</option>
+                <option>Dubai</option>
+                <option>Thailand</option>
+                <option>Singapore</option>
+                <option>Maldives</option>
+                <option>Japan</option>
+                <option>Australia</option>
+                <option>India</option>
+                <option>Other</option>
+              </select>
+            </div>
           </div>
-        </div>
-        <div class="form-group"><label>Message / Requirements</label><textarea placeholder="Tell us about your travel plans, dates, group size, budget..."></textarea></div>
-        <button class="submit-btn" onclick="alert('Thank you! We will contact you within 24 hours.')">Send Enquiry →</button>
+          <div class="form-group"><label>Message / Requirements</label><textarea name="message" placeholder="Tell us about your travel plans, dates, group size, budget..."></textarea></div>
+          <div id="formStatus" style="display:none;padding:0.8rem 1rem;border-radius:2px;margin-bottom:1rem;font-size:0.88rem;"></div>
+          <button type="submit" class="submit-btn">Send Enquiry →</button>
+        </form>
       </div>
+    </div>
+
+    <!-- GOOGLE MAPS -->
+    <div style="margin-top:3rem;border-radius:2px;overflow:hidden;border:1px solid rgba(201,168,76,0.15);">
+      <div style="padding:0.8rem 0;display:flex;align-items:center;gap:0.6rem;">
+        <span style="color:var(--gold)">📍</span>
+        <span style="color:var(--muted);font-size:0.85rem">Office No. 13, 1st Floor, Hill Road, Bandra West, Mumbai — 400050</span>
+      </div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.338!2d72.8268!3d19.0587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8dbe5f544c1%3A0xb3b4d9c0f3a4e4c0!2sHill%20Rd%2C%20Bandra%20West%2C%20Mumbai%2C%20Maharashtra%20400050!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+        width="100%" height="320" style="border:0;display:block;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
   </div>
 </section>
@@ -1629,19 +1645,122 @@
     observer.observe(el);
   });
 </script>
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/919711414123?text=Hi%20Holiday%20Caravan!%20I%20would%20like%20to%20enquire%20about%20a%20tour." target="_blank" rel="noopener"
-  style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;
-    background:#25D366;color:#fff;
-    width:56px;height:56px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);
-    text-decoration:none;transition:transform 0.2s;"
-  onmouseover="this.style.transform='scale(1.1)'"
-  onmouseout="this.style.transform='scale(1)'"
-  title="Chat on WhatsApp">
-  💬
-</a>
+<!-- WHATSAPP POPUP WIDGET -->
+<style>
+  #wa-widget { position:fixed; bottom:1.5rem; right:1.5rem; z-index:999; display:flex; flex-direction:column; align-items:flex-end; gap:0.8rem; }
+  #wa-popup {
+    display:none; background:#1e1e1e; border:1px solid rgba(37,211,102,0.3);
+    border-radius:12px; padding:1.2rem 1.4rem; width:270px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.5);
+    animation: waPop 0.2s ease both;
+  }
+  #wa-popup.open { display:block; }
+  @keyframes waPop { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  #wa-popup .wa-header { display:flex; align-items:center; gap:0.7rem; margin-bottom:0.8rem; }
+  #wa-popup .wa-avatar { width:40px; height:40px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+  #wa-popup .wa-name { font-size:0.85rem; color:#fff; font-weight:600; }
+  #wa-popup .wa-status { font-size:0.72rem; color:#25D366; }
+  #wa-popup .wa-msg { background:#2a2a2a; border-radius:8px; padding:0.8rem; font-size:0.82rem; color:#ccc; line-height:1.6; margin-bottom:1rem; }
+  #wa-popup .wa-btn {
+    display:block; background:#25D366; color:#fff; text-align:center;
+    padding:0.65rem; border-radius:8px; text-decoration:none;
+    font-size:0.82rem; font-weight:600; letter-spacing:0.04em;
+    transition:background 0.2s;
+  }
+  #wa-popup .wa-btn:hover { background:#20c15a; }
+  #wa-fab {
+    width:56px; height:56px; border-radius:50%; background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; box-shadow:0 4px 20px rgba(37,211,102,0.45);
+    border:none; font-size:1.6rem; transition:transform 0.2s;
+    position:relative;
+  }
+  #wa-fab:hover { transform:scale(1.08); }
+  #wa-fab .wa-badge {
+    position:absolute; top:-3px; right:-3px;
+    width:14px; height:14px; background:#ff4444; border-radius:50%;
+    border:2px solid #1C0F0A;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+</style>
+
+<div id="wa-widget">
+  <div id="wa-popup">
+    <div class="wa-header">
+      <div class="wa-avatar">🌍</div>
+      <div>
+        <div class="wa-name">Holiday Caravan</div>
+        <div class="wa-status">● Online</div>
+      </div>
+    </div>
+    <div class="wa-msg">Hi there! 👋 Ready to plan your next adventure? Chat with us on WhatsApp and we'll get back to you instantly.</div>
+    <a class="wa-btn" href="https://wa.me/919711414123?text=Hi%20Holiday%20Caravan!%20I%20would%20like%20to%20enquire%20about%20a%20tour." target="_blank" rel="noopener">
+      💬 Start Chat on WhatsApp
+    </a>
+  </div>
+  <button id="wa-fab" onclick="toggleWA()" aria-label="Chat on WhatsApp">
+    <span id="wa-icon">💬</span>
+    <span class="wa-badge"></span>
+  </button>
+</div>
+
+<script>
+  function toggleWA() {
+    const popup = document.getElementById('wa-popup');
+    const icon = document.getElementById('wa-icon');
+    popup.classList.toggle('open');
+    icon.textContent = popup.classList.contains('open') ? '✕' : '💬';
+  }
+  // Auto-open after 5 seconds
+  setTimeout(() => {
+    const popup = document.getElementById('wa-popup');
+    const icon = document.getElementById('wa-icon');
+    if (!popup.classList.contains('open')) {
+      popup.classList.add('open');
+      icon.textContent = '✕';
+    }
+  }, 5000);
+</script>
+
+<!-- FORMSPREE AJAX HANDLER -->
+<script>
+  const form = document.getElementById('enquiryForm');
+  const status = document.getElementById('formStatus');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          status.style.display = 'block';
+          status.style.background = 'rgba(37,211,102,0.1)';
+          status.style.border = '1px solid rgba(37,211,102,0.3)';
+          status.style.color = '#25D366';
+          status.textContent = '✓ Thank you! We will contact you within 24 hours.';
+          form.reset();
+        } else {
+          throw new Error('Failed');
+        }
+      } catch {
+        status.style.display = 'block';
+        status.style.background = 'rgba(255,60,60,0.1)';
+        status.style.border = '1px solid rgba(255,60,60,0.3)';
+        status.style.color = '#ff6b6b';
+        status.textContent = '✗ Something went wrong. Please call us at +91 97114 14123.';
+      }
+      btn.textContent = 'Send Enquiry →';
+      btn.disabled = false;
+    });
+  }
+</script>
 
 </body>
 </html>
